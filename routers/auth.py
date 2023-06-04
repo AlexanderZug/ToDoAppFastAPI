@@ -63,10 +63,11 @@ def authenticate_user(db: Session, username: str, password: str):
     return user
 
 
-def create_access_token(username: str, user_id: int, expires_delta: timedelta):
+def create_access_token(username: str, user_id: int, role: str, expires_delta: timedelta):
     to_encode = {
         'sub': username,
         'id': user_id,
+        'role': role,
     }
     expires = datetime.utcnow() + expires_delta
     to_encode.update({'exp': expires})
@@ -84,12 +85,13 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]):
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get('sub')
         user_id: int = payload.get('id')
+        user_role: str = payload.get('role')
         if username is None or user_id is None:
             raise credentials_exception
         token_data = TokenRequest(access_token=token, token_type='bearer')
     except JWTError:
         raise credentials_exception
-    return token_data
+    return {'username': username, 'id': user_id, 'user_role': user_role, 'token': token_data}
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
@@ -123,8 +125,9 @@ async def login_for_access_token(
             detail='Incorrect username or password',
         )
     token = create_access_token(
-        user.username,
-        user.id,
+        username=user.username,
+        user_id=user.id,
+        role=user.role,
         expires_delta=timedelta(minutes=15),
     )
     return {'access_token': token, 'token_type': 'bearer'}
