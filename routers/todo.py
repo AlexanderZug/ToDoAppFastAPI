@@ -37,10 +37,10 @@ class ToDoRequest(BaseModel):
     title: str = Field(min_length=3, max_length=50)
     description: str = Field(min_length=3, max_length=150)
     priority: int = Field(gt=0, lt=6)
-    completed: bool
+    complete: bool
 
 
-@router.get('/{todo_id}/', status_code=status.HTTP_200_OK)
+@router.get('/{todo_id}', status_code=status.HTTP_200_OK)
 async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(gt=0)):
     if user is None:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Unauthorized')
@@ -76,7 +76,7 @@ async def create_todo(
     return todo_model
 
 
-@router.put('/{todo_id}/', status_code=status.HTTP_204_NO_CONTENT)
+@router.put('/{todo_id}', status_code=status.HTTP_204_NO_CONTENT)
 async def update_todo(
         user: user_dependency,
         db: db_dependency,
@@ -96,13 +96,13 @@ async def update_todo(
     todo_model.title = todo_request.title
     todo_model.description = todo_request.description
     todo_model.priority = todo_request.priority
-    todo_model.completed = todo_request.completed
+    todo_model.complete = todo_request.complete
 
     db.add(todo_model)
     db.commit()
 
 
-@router.delete('/{todo_id}/', status_code=status.HTTP_204_NO_CONTENT)
+@router.delete('/{todo_id}', status_code=status.HTTP_204_NO_CONTENT)
 async def delete_todo(
         user: user_dependency,
         db: db_dependency,

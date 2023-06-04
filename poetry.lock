@@ -122,6 +122,14 @@ build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-spthem
 totp = ["cryptography"]
 
 [[package]]
+name = "psycopg2-binary"
+version = "2.9.6"
+description = "psycopg2 - Python-PostgreSQL Database Adapter"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "pyasn1"
 version = "0.5.0"
 description = "Pure-Python implementation of ASN.1 types and DER/BER/CER codecs (X.208)"
@@ -286,7 +294,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.11"
-content-hash = "bba8aa880f1c9f3ae37faed9aada013eea941d8a1515c693657d2b2b050d5800"
+content-hash = "03f615e4a6461deb626d5629aa4a7308fced1d036ae870fcc999a15edf78aaed"
 
 [metadata.files]
 anyio = []
@@ -299,6 +307,7 @@ greenlet = []
 h11 = []
 idna = []
 passlib = []
+psycopg2-binary = []
 pyasn1 = []
 pydantic = []
 python-dotenv = []
