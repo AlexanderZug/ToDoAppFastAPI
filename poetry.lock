@@ -16,6 +16,18 @@ test = ["anyio", "coverage[toml] (>=4.5)", "hypothesis (>=4.0)", "psutil (>=5.9)
 trio = ["trio (<0.22)"]
 
 [[package]]
+name = "bcrypt"
+version = "4.0.1"
+description = "Modern password hashing for your software and your servers"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+tests = ["pytest (>=3.2.1,!=3.3.0)"]
+typecheck = ["mypy"]
+
+[[package]]
 name = "click"
 version = "8.1.3"
 description = "Composable command line interface toolkit"
@@ -33,6 +45,21 @@ description = "Cross-platform colored terminal text."
 category = "main"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+
+[[package]]
+name = "ecdsa"
+version = "0.18.0"
+description = "ECDSA cryptographic signature library (pure python)"
+category = "main"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[package.dependencies]
+six = ">=1.9.0"
+
+[package.extras]
+gmpy = ["gmpy"]
+gmpy2 = ["gmpy2"]
 
 [[package]]
 name = "fastapi"
@@ -81,6 +108,28 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
+name = "passlib"
+version = "1.7.4"
+description = "comprehensive password hashing framework supporting over 30 schemes"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+argon2 = ["argon2-cffi (>=18.2.0)"]
+bcrypt = ["bcrypt (>=3.1.0)"]
+build_docs = ["sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)", "cloud-sptheme (>=1.10.1)"]
+totp = ["cryptography"]
+
+[[package]]
+name = "pyasn1"
+version = "0.5.0"
+description = "Pure-Python implementation of ASN.1 types and DER/BER/CER codecs (X.208)"
+category = "main"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
+
+[[package]]
 name = "pydantic"
 version = "1.10.8"
 description = "Data validation and settings management using python type hints"
@@ -94,6 +143,65 @@ typing-extensions = ">=4.2.0"
 [package.extras]
 dotenv = ["python-dotenv (>=0.10.4)"]
 email = ["email-validator (>=1.0.3)"]
+
+[[package]]
+name = "python-dotenv"
+version = "1.0.0"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
+name = "python-jose"
+version = "3.3.0"
+description = "JOSE implementation in Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+ecdsa = "!=0.15"
+pyasn1 = "*"
+rsa = "*"
+
+[package.extras]
+cryptography = ["cryptography (>=3.4.0)"]
+pycrypto = ["pycrypto (>=2.6.0,<2.7.0)", "pyasn1"]
+pycryptodome = ["pycryptodome (>=3.3.1,<4.0.0)", "pyasn1"]
+
+[[package]]
+name = "python-multipart"
+version = "0.0.6"
+description = "A streaming multipart parser for Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+dev = ["atomicwrites (==1.2.1)", "attrs (==19.2.0)", "coverage (==6.5.0)", "hatch", "invoke (==1.7.3)", "more-itertools (==4.3.0)", "pbr (==4.3.0)", "pluggy (==1.0.0)", "py (==1.11.0)", "pytest-cov (==4.0.0)", "pytest-timeout (==2.1.0)", "pytest (==7.2.0)", "pyyaml (==5.1)"]
+
+[[package]]
+name = "rsa"
+version = "4.9"
+description = "Pure-Python RSA implementation"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4"
+
+[package.dependencies]
+pyasn1 = ">=0.1.3"
+
+[[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 
 [[package]]
 name = "sniffio"
@@ -178,17 +286,26 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.11"
-content-hash = "d5c64d779aab6c9fba767e2f52a1f3f0332cdee0e48bd65e6d9d3cfd24ffff6e"
+content-hash = "bba8aa880f1c9f3ae37faed9aada013eea941d8a1515c693657d2b2b050d5800"
 
 [metadata.files]
 anyio = []
+bcrypt = []
 click = []
 colorama = []
+ecdsa = []
 fastapi = []
 greenlet = []
 h11 = []
 idna = []
+passlib = []
+pyasn1 = []
 pydantic = []
+python-dotenv = []
+python-jose = []
+python-multipart = []
+rsa = []
+six = []
 sniffio = []
 sqlalchemy = []
 starlette = []
