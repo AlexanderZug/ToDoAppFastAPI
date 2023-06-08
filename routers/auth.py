@@ -1,6 +1,6 @@
 import os
 from datetime import timedelta, datetime
-from typing import Annotated
+from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
@@ -45,6 +45,7 @@ class UserRequest(BaseModel):
     first_name: str = Field(min_length=3, max_length=50)
     last_name: str = Field(min_length=3, max_length=50)
     password: str = Field(min_length=6, max_length=150)
+    phone_number: Optional[str]
     email: str = Field(min_length=4, max_length=50)
     role: str = Field(min_length=3, max_length=50)
 
@@ -104,6 +105,7 @@ async def create_user(
         first_name=user_request.first_name,
         last_name=user_request.last_name,
         hashed_password=bcrypt_context.hash(user_request.password),
+        phone_number=user_request.phone_number,
         email=user_request.email,
         role=user_request.role,
     )
